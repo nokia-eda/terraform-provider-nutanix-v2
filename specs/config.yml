@@ -1,0 +1,38 @@
+provider:
+  name: nutanix
+
+data_sources:
+  app_group:
+    read:
+      path: /apps/nutanix.eda.nokia.com
+      method: GET
+
+  nutanix_plugin_instance:
+    read:
+      path: /apps/nutanix.eda.nokia.com/v2/nutanixplugininstances/{name}
+      method: GET
+
+  nutanix_plugin_instance_list:
+    read:
+      path: /apps/nutanix.eda.nokia.com/v2/nutanixplugininstances
+      method: GET
+
+  resource_list:
+    read:
+      path: /apps/nutanix.eda.nokia.com/v2
+      method: GET
+
+resources:
+  nutanix_plugin_instance:
+    create:
+      path: /apps/nutanix.eda.nokia.com/v2/nutanixplugininstances
+      method: POST
+    read:
+      path: /apps/nutanix.eda.nokia.com/v2/nutanixplugininstances/{name}
+      method: GET
+    update:
+      path: /apps/nutanix.eda.nokia.com/v2/nutanixplugininstances/{name}
+      method: PUT
+    delete:
+      path: /apps/nutanix.eda.nokia.com/v2/nutanixplugininstances/{name}
+      method: DELETE

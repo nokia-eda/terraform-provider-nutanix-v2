@@ -1,0 +1,15 @@
+Path,Method,Schema,Model Name,Supported,Datasource,Resource
+/apps/nutanix.eda.nokia.com,GET,AppGroup,app_group,true,true,false
+/apps/nutanix.eda.nokia.com/v2,GET,ResourceList,resource_list,true,true,false
+/apps/nutanix.eda.nokia.com/v2/_ui/{pathname},GET,UIResult,,false,false,false
+/apps/nutanix.eda.nokia.com/v2/nutanixplugininstances,DELETE,com.nokia.eda.nutanix.v2.NutanixPluginInstanceList,,false,false,false
+/apps/nutanix.eda.nokia.com/v2/nutanixplugininstances,GET,com.nokia.eda.nutanix.v2.NutanixPluginInstanceList,nutanix_plugin_instance_list,true,true,false
+/apps/nutanix.eda.nokia.com/v2/nutanixplugininstances,POST,com.nokia.eda.nutanix.v2.NutanixPluginInstance,nutanix_plugin_instance,true,false,true
+/apps/nutanix.eda.nokia.com/v2/nutanixplugininstances/_deleted,GET,com.nokia.eda.nutanix.v2.NutanixPluginInstance_DeletedResources,,false,false,false
+/apps/nutanix.eda.nokia.com/v2/nutanixplugininstances/{name},DELETE,Status,nutanix_plugin_instance,true,false,true
+/apps/nutanix.eda.nokia.com/v2/nutanixplugininstances/{name},GET,com.nokia.eda.nutanix.v2.NutanixPluginInstance,nutanix_plugin_instance,true,true,true
+/apps/nutanix.eda.nokia.com/v2/nutanixplugininstances/{name},PATCH,com.nokia.eda.nutanix.v2.NutanixPluginInstance,,false,false,false
+/apps/nutanix.eda.nokia.com/v2/nutanixplugininstances/{name},PUT,com.nokia.eda.nutanix.v2.NutanixPluginInstance,nutanix_plugin_instance,true,false,true
+/apps/nutanix.eda.nokia.com/v2/nutanixplugininstances/{name}/_revs,GET,ResourceHistory,,false,false,false
+/apps/nutanix.eda.nokia.com/v2/nutanixplugininstances/{name}/_targets,GET,IntentTargets,,false,false,false
+/apps/nutanix.eda.nokia.com/v2/nutanixplugininstances/{name}/_topology,POST,K8STopologyRequest,,false,false,false
