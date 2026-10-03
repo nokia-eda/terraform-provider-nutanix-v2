@@ -262,6 +262,8 @@ func (p *nutanixProvider) Metadata(ctx context.Context, req provider.MetadataReq
 func (p *nutanixProvider) DataSources(ctx context.Context) []func() datasource.DataSource {
 	return []func() datasource.DataSource{
 		NewAppGroupDataSource,
+		NewNutanixEdaManagedBridgeDomainDataSource,
+		NewNutanixEdaManagedBridgeDomainListDataSource,
 		NewNutanixPluginInstanceDataSource,
 		NewNutanixPluginInstanceListDataSource,
 		NewResourceListDataSource,
@@ -270,6 +272,7 @@ func (p *nutanixProvider) DataSources(ctx context.Context) []func() datasource.D
 
 func (p *nutanixProvider) Resources(ctx context.Context) []func() resource.Resource {
 	return []func() resource.Resource{
+		NewNutanixEdaManagedBridgeDomainResource,
 		NewNutanixPluginInstanceResource,
 	}
 }

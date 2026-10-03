@@ -5,6 +5,12 @@ datasources:
   - model_name: resource_list
     oas_endpoint: /apps/nutanix.eda.nokia.com/v2
     oas_schema: ResourceList
+  - model_name: nutanix_eda_managed_bridge_domain_list
+    oas_endpoint: /apps/nutanix.eda.nokia.com/v2/namespaces/{namespace}/nutanixedamanagedbridgedomains
+    oas_schema: com.nokia.eda.nutanix.v2.NutanixEDAManagedBridgeDomainList
+  - model_name: nutanix_eda_managed_bridge_domain
+    oas_endpoint: /apps/nutanix.eda.nokia.com/v2/namespaces/{namespace}/nutanixedamanagedbridgedomains/{name}
+    oas_schema: com.nokia.eda.nutanix.v2.NutanixEDAManagedBridgeDomain
   - model_name: nutanix_plugin_instance_list
     oas_endpoint: /apps/nutanix.eda.nokia.com/v2/nutanixplugininstances
     oas_schema: com.nokia.eda.nutanix.v2.NutanixPluginInstanceList
@@ -13,6 +19,9 @@ datasources:
     oas_schema: com.nokia.eda.nutanix.v2.NutanixPluginInstance
 
 resources:
+  - model_name: nutanix_eda_managed_bridge_domain
+    oas_endpoint: /apps/nutanix.eda.nokia.com/v2/namespaces/{namespace}/nutanixedamanagedbridgedomains
+    oas_schema: com.nokia.eda.nutanix.v2.NutanixEDAManagedBridgeDomain
   - model_name: nutanix_plugin_instance
     oas_endpoint: /apps/nutanix.eda.nokia.com/v2/nutanixplugininstances
     oas_schema: com.nokia.eda.nutanix.v2.NutanixPluginInstance
@@ -20,11 +29,13 @@ resources:
 qualified:
   datasources:
     - oas_schema: IntentTargets
-      get: /apps/nutanix.eda.nokia.com/v2/nutanixplugininstances/{name}/_targets
+      get: /apps/nutanix.eda.nokia.com/v2/namespaces/{namespace}/nutanixedamanagedbridgedomains/{name}/_targets
     - oas_schema: ResourceHistory
-      get: /apps/nutanix.eda.nokia.com/v2/nutanixplugininstances/{name}/_revs
+      get: /apps/nutanix.eda.nokia.com/v2/namespaces/{namespace}/nutanixedamanagedbridgedomains/{name}/_revs
     - oas_schema: UIResult
       get: /apps/nutanix.eda.nokia.com/v2/_ui/{pathname}
+    - oas_schema: com.nokia.eda.nutanix.v2.NutanixEDAManagedBridgeDomain_DeletedResources
+      get: /apps/nutanix.eda.nokia.com/v2/namespaces/{namespace}/nutanixedamanagedbridgedomains/_deleted
     - oas_schema: com.nokia.eda.nutanix.v2.NutanixPluginInstance_DeletedResources
       get: /apps/nutanix.eda.nokia.com/v2/nutanixplugininstances/_deleted
   resources:

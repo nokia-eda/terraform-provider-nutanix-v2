@@ -68,6 +68,408 @@
             }
         },
         {
+            "name": "nutanix_eda_managed_bridge_domain",
+            "schema": {
+                "attributes": [
+                    {
+                        "name": "name",
+                        "string": {
+                            "computed_optional_required": "required",
+                            "description": "name of the NutanixEDAManagedBridgeDomain"
+                        }
+                    },
+                    {
+                        "name": "hash",
+                        "string": {
+                            "computed_optional_required": "computed_optional",
+                            "description": "resource content will be returned as it was at the time of this git hash"
+                        }
+                    },
+                    {
+                        "name": "namespace",
+                        "string": {
+                            "computed_optional_required": "required",
+                            "description": "the namespace scope in which to operate"
+                        }
+                    },
+                    {
+                        "name": "alarms",
+                        "single_nested": {
+                            "computed_optional_required": "computed",
+                            "attributes": [
+                                {
+                                    "name": "critical",
+                                    "int64": {
+                                        "computed_optional_required": "computed"
+                                    }
+                                },
+                                {
+                                    "name": "major",
+                                    "int64": {
+                                        "computed_optional_required": "computed"
+                                    }
+                                },
+                                {
+                                    "name": "minor",
+                                    "int64": {
+                                        "computed_optional_required": "computed"
+                                    }
+                                },
+                                {
+                                    "name": "warning",
+                                    "int64": {
+                                        "computed_optional_required": "computed"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "name": "api_version",
+                        "string": {
+                            "computed_optional_required": "computed"
+                        }
+                    },
+                    {
+                        "name": "deviations",
+                        "single_nested": {
+                            "computed_optional_required": "computed",
+                            "attributes": [
+                                {
+                                    "name": "count",
+                                    "int64": {
+                                        "computed_optional_required": "computed"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "name": "kind",
+                        "string": {
+                            "computed_optional_required": "computed"
+                        }
+                    },
+                    {
+                        "name": "metadata",
+                        "single_nested": {
+                            "computed_optional_required": "computed",
+                            "attributes": [
+                                {
+                                    "name": "annotations",
+                                    "map": {
+                                        "computed_optional_required": "computed",
+                                        "element_type": {
+                                            "string": {}
+                                        }
+                                    }
+                                },
+                                {
+                                    "name": "labels",
+                                    "map": {
+                                        "computed_optional_required": "computed",
+                                        "element_type": {
+                                            "string": {}
+                                        }
+                                    }
+                                },
+                                {
+                                    "name": "name",
+                                    "string": {
+                                        "computed_optional_required": "computed"
+                                    }
+                                },
+                                {
+                                    "name": "namespace",
+                                    "string": {
+                                        "computed_optional_required": "computed"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "name": "spec",
+                        "single_nested": {
+                            "computed_optional_required": "computed",
+                            "attributes": [
+                                {
+                                    "name": "bridge_domain_name",
+                                    "string": {
+                                        "computed_optional_required": "computed",
+                                        "description": "The name of the EDA BridgeDomain."
+                                    }
+                                },
+                                {
+                                    "name": "management_type",
+                                    "string": {
+                                        "computed_optional_required": "computed",
+                                        "description": "The ManagementType of the Nutanix Subnet. If you choose \"EDA Ignored\", the Nutanix Prism Central Connect plugin\nwill not try to program any VLANs for this Nutanix Subnet."
+                                    }
+                                },
+                                {
+                                    "name": "plugin_name",
+                                    "string": {
+                                        "computed_optional_required": "computed",
+                                        "description": "The name of the ConnectPlugin managed by the Nutanix app."
+                                    }
+                                },
+                                {
+                                    "name": "subnet_id",
+                                    "string": {
+                                        "computed_optional_required": "computed",
+                                        "description": "The ID of the Subnet managed by the BridgeDomain."
+                                    }
+                                }
+                            ],
+                            "description": "NutanixEDAManagedBridgeDomainSpec defines the desired state of NutanixEDAManagedBridgeDomain"
+                        }
+                    },
+                    {
+                        "name": "status",
+                        "single_nested": {
+                            "computed_optional_required": "computed",
+                            "attributes": [
+                                {
+                                    "name": "error_message",
+                                    "string": {
+                                        "computed_optional_required": "computed"
+                                    }
+                                },
+                                {
+                                    "name": "operational_status",
+                                    "string": {
+                                        "computed_optional_required": "computed",
+                                        "description": "Indicates the current operational state of the BridgeDomain"
+                                    }
+                                }
+                            ],
+                            "description": "NutanixEDAManagedBridgeDomainStatus defines the observed state of NutanixEDAManagedBridgeDomain"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "name": "nutanix_eda_managed_bridge_domain_list",
+            "schema": {
+                "attributes": [
+                    {
+                        "name": "fields",
+                        "string": {
+                            "computed_optional_required": "computed_optional",
+                            "description": "a comma-separated list of resource fields to fetch/return.  If unspecified, all fields are fetched.  If empty, only key-fields are fetched."
+                        }
+                    },
+                    {
+                        "name": "filter",
+                        "string": {
+                            "computed_optional_required": "computed_optional",
+                            "description": "an EQL \"where\" expression that will be used to filter the set of resources returned."
+                        }
+                    },
+                    {
+                        "name": "label_selector",
+                        "string": {
+                            "computed_optional_required": "computed_optional",
+                            "description": "A label selector string to filter the results based on resource labels. If specified multiple times, the union of resources which satisfy a label-selector will be returned."
+                        }
+                    },
+                    {
+                        "name": "labelselector",
+                        "string": {
+                            "computed_optional_required": "computed_optional",
+                            "description": "Deprecated: a label selector string to filter the results based on CR labels"
+                        }
+                    },
+                    {
+                        "name": "namespace",
+                        "string": {
+                            "computed_optional_required": "required",
+                            "description": "the namespace scope in which to operate"
+                        }
+                    },
+                    {
+                        "name": "api_version",
+                        "string": {
+                            "computed_optional_required": "computed"
+                        }
+                    },
+                    {
+                        "name": "items",
+                        "list_nested": {
+                            "computed_optional_required": "computed",
+                            "nested_object": {
+                                "attributes": [
+                                    {
+                                        "name": "alarms",
+                                        "single_nested": {
+                                            "computed_optional_required": "computed",
+                                            "attributes": [
+                                                {
+                                                    "name": "critical",
+                                                    "int64": {
+                                                        "computed_optional_required": "computed"
+                                                    }
+                                                },
+                                                {
+                                                    "name": "major",
+                                                    "int64": {
+                                                        "computed_optional_required": "computed"
+                                                    }
+                                                },
+                                                {
+                                                    "name": "minor",
+                                                    "int64": {
+                                                        "computed_optional_required": "computed"
+                                                    }
+                                                },
+                                                {
+                                                    "name": "warning",
+                                                    "int64": {
+                                                        "computed_optional_required": "computed"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "api_version",
+                                        "string": {
+                                            "computed_optional_required": "computed"
+                                        }
+                                    },
+                                    {
+                                        "name": "deviations",
+                                        "single_nested": {
+                                            "computed_optional_required": "computed",
+                                            "attributes": [
+                                                {
+                                                    "name": "count",
+                                                    "int64": {
+                                                        "computed_optional_required": "computed"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "kind",
+                                        "string": {
+                                            "computed_optional_required": "computed"
+                                        }
+                                    },
+                                    {
+                                        "name": "metadata",
+                                        "single_nested": {
+                                            "computed_optional_required": "computed",
+                                            "attributes": [
+                                                {
+                                                    "name": "annotations",
+                                                    "map": {
+                                                        "computed_optional_required": "computed",
+                                                        "element_type": {
+                                                            "string": {}
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "name": "labels",
+                                                    "map": {
+                                                        "computed_optional_required": "computed",
+                                                        "element_type": {
+                                                            "string": {}
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "name": "name",
+                                                    "string": {
+                                                        "computed_optional_required": "computed"
+                                                    }
+                                                },
+                                                {
+                                                    "name": "namespace",
+                                                    "string": {
+                                                        "computed_optional_required": "computed"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "spec",
+                                        "single_nested": {
+                                            "computed_optional_required": "computed",
+                                            "attributes": [
+                                                {
+                                                    "name": "bridge_domain_name",
+                                                    "string": {
+                                                        "computed_optional_required": "computed",
+                                                        "description": "The name of the EDA BridgeDomain."
+                                                    }
+                                                },
+                                                {
+                                                    "name": "management_type",
+                                                    "string": {
+                                                        "computed_optional_required": "computed",
+                                                        "description": "The ManagementType of the Nutanix Subnet. If you choose \"EDA Ignored\", the Nutanix Prism Central Connect plugin\nwill not try to program any VLANs for this Nutanix Subnet."
+                                                    }
+                                                },
+                                                {
+                                                    "name": "plugin_name",
+                                                    "string": {
+                                                        "computed_optional_required": "computed",
+                                                        "description": "The name of the ConnectPlugin managed by the Nutanix app."
+                                                    }
+                                                },
+                                                {
+                                                    "name": "subnet_id",
+                                                    "string": {
+                                                        "computed_optional_required": "computed",
+                                                        "description": "The ID of the Subnet managed by the BridgeDomain."
+                                                    }
+                                                }
+                                            ],
+                                            "description": "NutanixEDAManagedBridgeDomainSpec defines the desired state of NutanixEDAManagedBridgeDomain"
+                                        }
+                                    },
+                                    {
+                                        "name": "status",
+                                        "single_nested": {
+                                            "computed_optional_required": "computed",
+                                            "attributes": [
+                                                {
+                                                    "name": "error_message",
+                                                    "string": {
+                                                        "computed_optional_required": "computed"
+                                                    }
+                                                },
+                                                {
+                                                    "name": "operational_status",
+                                                    "string": {
+                                                        "computed_optional_required": "computed",
+                                                        "description": "Indicates the current operational state of the BridgeDomain"
+                                                    }
+                                                }
+                                            ],
+                                            "description": "NutanixEDAManagedBridgeDomainStatus defines the observed state of NutanixEDAManagedBridgeDomain"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "kind",
+                        "string": {
+                            "computed_optional_required": "computed"
+                        }
+                    }
+                ]
+            }
+        },
+        {
             "name": "nutanix_plugin_instance",
             "schema": {
                 "attributes": [
@@ -184,54 +586,61 @@
                     {
                         "name": "spec",
                         "single_nested": {
-                            "computed_optional_required": "optional",
+                            "computed_optional_required": "computed",
                             "attributes": [
                                 {
                                     "name": "auth_secret_ref",
                                     "string": {
-                                        "computed_optional_required": "optional",
+                                        "computed_optional_required": "computed",
                                         "description": "The name of a secret containing 'username' and 'password' keys to authenticate with Prism Central."
                                     }
                                 },
                                 {
                                     "name": "heartbeat_interval_seconds",
                                     "int64": {
-                                        "computed_optional_required": "optional",
+                                        "computed_optional_required": "computed",
                                         "description": "The time interval in seconds between successive heartbeats."
+                                    }
+                                },
+                                {
+                                    "name": "operational_mode",
+                                    "string": {
+                                        "computed_optional_required": "computed",
+                                        "description": "Option to restrict the plugin to either Connect or EDA managed networking."
                                     }
                                 },
                                 {
                                     "name": "plugin_namespace",
                                     "string": {
-                                        "computed_optional_required": "optional",
+                                        "computed_optional_required": "computed",
                                         "description": "The namespace for the Plugin resources."
                                     }
                                 },
                                 {
                                     "name": "prism_central_certificate",
                                     "string": {
-                                        "computed_optional_required": "optional",
+                                        "computed_optional_required": "computed",
                                         "description": "Optional certificate string to use to verify the server identity."
                                     }
                                 },
                                 {
                                     "name": "prism_central_host",
                                     "string": {
-                                        "computed_optional_required": "optional",
+                                        "computed_optional_required": "computed",
                                         "description": "The URL to the Nutanix Prism Central, with http(s) scheme."
                                     }
                                 },
                                 {
                                     "name": "prism_central_poll_interval_seconds",
                                     "int64": {
-                                        "computed_optional_required": "optional",
+                                        "computed_optional_required": "computed",
                                         "description": "The interval between polls to Prism Central for state changes, in seconds."
                                     }
                                 },
                                 {
                                     "name": "prism_central_tls_verify",
                                     "bool": {
-                                        "computed_optional_required": "optional",
+                                        "computed_optional_required": "computed",
                                         "description": "Whether the client will verify the server's certificate."
                                     }
                                 }
@@ -392,54 +801,61 @@
                                     {
                                         "name": "spec",
                                         "single_nested": {
-                                            "computed_optional_required": "optional",
+                                            "computed_optional_required": "computed",
                                             "attributes": [
                                                 {
                                                     "name": "auth_secret_ref",
                                                     "string": {
-                                                        "computed_optional_required": "optional",
+                                                        "computed_optional_required": "computed",
                                                         "description": "The name of a secret containing 'username' and 'password' keys to authenticate with Prism Central."
                                                     }
                                                 },
                                                 {
                                                     "name": "heartbeat_interval_seconds",
                                                     "int64": {
-                                                        "computed_optional_required": "optional",
+                                                        "computed_optional_required": "computed",
                                                         "description": "The time interval in seconds between successive heartbeats."
+                                                    }
+                                                },
+                                                {
+                                                    "name": "operational_mode",
+                                                    "string": {
+                                                        "computed_optional_required": "computed",
+                                                        "description": "Option to restrict the plugin to either Connect or EDA managed networking."
                                                     }
                                                 },
                                                 {
                                                     "name": "plugin_namespace",
                                                     "string": {
-                                                        "computed_optional_required": "optional",
+                                                        "computed_optional_required": "computed",
                                                         "description": "The namespace for the Plugin resources."
                                                     }
                                                 },
                                                 {
                                                     "name": "prism_central_certificate",
                                                     "string": {
-                                                        "computed_optional_required": "optional",
+                                                        "computed_optional_required": "computed",
                                                         "description": "Optional certificate string to use to verify the server identity."
                                                     }
                                                 },
                                                 {
                                                     "name": "prism_central_host",
                                                     "string": {
-                                                        "computed_optional_required": "optional",
+                                                        "computed_optional_required": "computed",
                                                         "description": "The URL to the Nutanix Prism Central, with http(s) scheme."
                                                     }
                                                 },
                                                 {
                                                     "name": "prism_central_poll_interval_seconds",
                                                     "int64": {
-                                                        "computed_optional_required": "optional",
+                                                        "computed_optional_required": "computed",
                                                         "description": "The interval between polls to Prism Central for state changes, in seconds."
                                                     }
                                                 },
                                                 {
                                                     "name": "prism_central_tls_verify",
                                                     "bool": {
-                                                        "computed_optional_required": "optional",
+                                                        "computed_optional_required": "computed",
                                                         "description": "Whether the client will verify the server's certificate."
                                                     }
                                                 }
@@ -543,6 +959,255 @@
         "name": "nutanix"
     },
     "resources": [
+        {
+            "name": "nutanix_eda_managed_bridge_domain",
+            "schema": {
+                "attributes": [
+                    {
+                        "name": "alarms",
+                        "single_nested": {
+                            "computed_optional_required": "computed_optional",
+                            "attributes": [
+                                {
+                                    "name": "critical",
+                                    "int64": {
+                                        "computed_optional_required": "computed_optional"
+                                    }
+                                },
+                                {
+                                    "name": "major",
+                                    "int64": {
+                                        "computed_optional_required": "computed_optional"
+                                    }
+                                },
+                                {
+                                    "name": "minor",
+                                    "int64": {
+                                        "computed_optional_required": "computed_optional"
+                                    }
+                                },
+                                {
+                                    "name": "warning",
+                                    "int64": {
+                                        "computed_optional_required": "computed_optional"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "name": "api_version",
+                        "string": {
+                            "computed_optional_required": "computed_optional",
+                            "default": {
+                                "static": "nutanix.eda.nokia.com/v2"
+                            },
+                            "validators": [
+                                {
+                                    "custom": {
+                                        "imports": [
+                                            {
+                                                "path": "regexp"
+                                            },
+                                            {
+                                                "path": "github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
+                                            }
+                                        ],
+                                        "schema_definition": "stringvalidator.RegexMatches(regexp.MustCompile(\"^nutanix\\\\.eda\\\\.nokia\\\\.com/v2$\"), \"\")"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "name": "deviations",
+                        "single_nested": {
+                            "computed_optional_required": "computed_optional",
+                            "attributes": [
+                                {
+                                    "name": "count",
+                                    "int64": {
+                                        "computed_optional_required": "computed_optional"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "name": "kind",
+                        "string": {
+                            "computed_optional_required": "computed_optional",
+                            "default": {
+                                "static": "NutanixEDAManagedBridgeDomain"
+                            },
+                            "validators": [
+                                {
+                                    "custom": {
+                                        "imports": [
+                                            {
+                                                "path": "regexp"
+                                            },
+                                            {
+                                                "path": "github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
+                                            }
+                                        ],
+                                        "schema_definition": "stringvalidator.RegexMatches(regexp.MustCompile(\"^NutanixEDAManagedBridgeDomain$\"), \"\")"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "name": "metadata",
+                        "single_nested": {
+                            "computed_optional_required": "required",
+                            "attributes": [
+                                {
+                                    "name": "annotations",
+                                    "map": {
+                                        "computed_optional_required": "computed_optional",
+                                        "element_type": {
+                                            "string": {}
+                                        }
+                                    }
+                                },
+                                {
+                                    "name": "labels",
+                                    "map": {
+                                        "computed_optional_required": "computed_optional",
+                                        "element_type": {
+                                            "string": {}
+                                        }
+                                    }
+                                },
+                                {
+                                    "name": "name",
+                                    "string": {
+                                        "computed_optional_required": "required",
+                                        "validators": [
+                                            {
+                                                "custom": {
+                                                    "imports": [
+                                                        {
+                                                            "path": "github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
+                                                        }
+                                                    ],
+                                                    "schema_definition": "stringvalidator.LengthAtMost(253)"
+                                                }
+                                            },
+                                            {
+                                                "custom": {
+                                                    "imports": [
+                                                        {
+                                                            "path": "regexp"
+                                                        },
+                                                        {
+                                                            "path": "github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
+                                                        }
+                                                    ],
+                                                    "schema_definition": "stringvalidator.RegexMatches(regexp.MustCompile(\"^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$\"), \"\")"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "name": "namespace",
+                                    "string": {
+                                        "computed_optional_required": "required"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "name": "spec",
+                        "single_nested": {
+                            "computed_optional_required": "required",
+                            "attributes": [
+                                {
+                                    "name": "bridge_domain_name",
+                                    "string": {
+                                        "computed_optional_required": "required",
+                                        "description": "The name of the EDA BridgeDomain."
+                                    }
+                                },
+                                {
+                                    "name": "management_type",
+                                    "string": {
+                                        "computed_optional_required": "computed_optional",
+                                        "description": "The ManagementType of the Nutanix Subnet. If you choose \"EDA Ignored\", the Nutanix Prism Central Connect plugin\nwill not try to program any VLANs for this Nutanix Subnet.",
+                                        "validators": [
+                                            {
+                                                "custom": {
+                                                    "imports": [
+                                                        {
+                                                            "path": "github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
+                                                        }
+                                                    ],
+                                                    "schema_definition": "stringvalidator.OneOf(\n\"EDA Managed\",\n\"EDA Ignored\",\n)"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "name": "plugin_name",
+                                    "string": {
+                                        "computed_optional_required": "required",
+                                        "description": "The name of the ConnectPlugin managed by the Nutanix app."
+                                    }
+                                },
+                                {
+                                    "name": "subnet_id",
+                                    "string": {
+                                        "computed_optional_required": "required",
+                                        "description": "The ID of the Subnet managed by the BridgeDomain."
+                                    }
+                                }
+                            ],
+                            "description": "NutanixEDAManagedBridgeDomainSpec defines the desired state of NutanixEDAManagedBridgeDomain"
+                        }
+                    },
+                    {
+                        "name": "status",
+                        "single_nested": {
+                            "computed_optional_required": "computed_optional",
+                            "attributes": [
+                                {
+                                    "name": "error_message",
+                                    "string": {
+                                        "computed_optional_required": "computed_optional"
+                                    }
+                                },
+                                {
+                                    "name": "operational_status",
+                                    "string": {
+                                        "computed_optional_required": "computed_optional",
+                                        "description": "Indicates the current operational state of the BridgeDomain"
+                                    }
+                                }
+                            ],
+                            "description": "NutanixEDAManagedBridgeDomainStatus defines the observed state of NutanixEDAManagedBridgeDomain"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "string": {
+                            "computed_optional_required": "computed_optional",
+                            "description": "name of the NutanixEDAManagedBridgeDomain"
+                        }
+                    },
+                    {
+                        "name": "namespace",
+                        "string": {
+                            "computed_optional_required": "computed_optional",
+                            "description": "the namespace scope in which to operate"
+                        }
+                    }
+                ]
+            }
+        },
         {
             "name": "nutanix_plugin_instance",
             "schema": {
@@ -730,6 +1395,28 @@
                                     }
                                 },
                                 {
+                                    "name": "operational_mode",
+                                    "string": {
+                                        "computed_optional_required": "computed_optional",
+                                        "default": {
+                                            "static": "Unrestricted"
+                                        },
+                                        "description": "Option to restrict the plugin to either Connect or EDA managed networking.",
+                                        "validators": [
+                                            {
+                                                "custom": {
+                                                    "imports": [
+                                                        {
+                                                            "path": "github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
+                                                        }
+                                                    ],
+                                                    "schema_definition": "stringvalidator.OneOf(\n\"ConnectManagedOnly\",\n\"EDAManagedOnly\",\n\"Unrestricted\",\n)"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
                                     "name": "plugin_namespace",
                                     "string": {
                                         "computed_optional_required": "required",
@@ -739,7 +1426,7 @@
                                 {
                                     "name": "prism_central_certificate",
                                     "string": {
-                                        "computed_optional_required": "optional",
+                                        "computed_optional_required": "computed_optional",
                                         "description": "Optional certificate string to use to verify the server identity."
                                     }
                                 },

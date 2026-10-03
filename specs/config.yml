@@ -7,6 +7,16 @@ data_sources:
       path: /apps/nutanix.eda.nokia.com
       method: GET
 
+  nutanix_eda_managed_bridge_domain:
+    read:
+      path: /apps/nutanix.eda.nokia.com/v2/namespaces/{namespace}/nutanixedamanagedbridgedomains/{name}
+      method: GET
+
+  nutanix_eda_managed_bridge_domain_list:
+    read:
+      path: /apps/nutanix.eda.nokia.com/v2/namespaces/{namespace}/nutanixedamanagedbridgedomains
+      method: GET
+
   nutanix_plugin_instance:
     read:
       path: /apps/nutanix.eda.nokia.com/v2/nutanixplugininstances/{name}
@@ -23,6 +33,20 @@ data_sources:
       method: GET
 
 resources:
+  nutanix_eda_managed_bridge_domain:
+    create:
+      path: /apps/nutanix.eda.nokia.com/v2/namespaces/{namespace}/nutanixedamanagedbridgedomains
+      method: POST
+    read:
+      path: /apps/nutanix.eda.nokia.com/v2/namespaces/{namespace}/nutanixedamanagedbridgedomains/{name}
+      method: GET
+    update:
+      path: /apps/nutanix.eda.nokia.com/v2/namespaces/{namespace}/nutanixedamanagedbridgedomains/{name}
+      method: PUT
+    delete:
+      path: /apps/nutanix.eda.nokia.com/v2/namespaces/{namespace}/nutanixedamanagedbridgedomains/{name}
+      method: DELETE
+
   nutanix_plugin_instance:
     create:
       path: /apps/nutanix.eda.nokia.com/v2/nutanixplugininstances

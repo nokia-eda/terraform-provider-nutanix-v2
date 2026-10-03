@@ -55,6 +55,7 @@ Required:
 Optional:
 
 - `heartbeat_interval_seconds` (Number) The time interval in seconds between successive heartbeats.
+- `operational_mode` (String) Option to restrict the plugin to either Connect or EDA managed networking.
 - `prism_central_certificate` (String) Optional certificate string to use to verify the server identity.
 - `prism_central_poll_interval_seconds` (Number) The interval between polls to Prism Central for state changes, in seconds.
 - `prism_central_tls_verify` (Boolean) Whether the client will verify the server's certificate.

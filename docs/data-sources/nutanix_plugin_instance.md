@@ -22,7 +22,6 @@ description: |-
 ### Optional
 
 - `hash` (String) resource content will be returned as it was at the time of this git hash
-- `spec` (Attributes) NutanixPluginInstanceSpec defines the desired state of NutanixPluginInstance (see [below for nested schema](#nestedatt--spec))
 
 ### Read-Only
 
@@ -31,21 +30,8 @@ description: |-
 - `deviations` (Attributes) (see [below for nested schema](#nestedatt--deviations))
 - `kind` (String)
 - `metadata` (Attributes) (see [below for nested schema](#nestedatt--metadata))
+- `spec` (Attributes) NutanixPluginInstanceSpec defines the desired state of NutanixPluginInstance (see [below for nested schema](#nestedatt--spec))
 - `status` (Attributes) NutanixPluginInstanceStatus defines the observed state of NutanixPluginInstance (see [below for nested schema](#nestedatt--status))
-
-<a id="nestedatt--spec"></a>
-### Nested Schema for `spec`
-
-Optional:
-
-- `auth_secret_ref` (String) The name of a secret containing 'username' and 'password' keys to authenticate with Prism Central.
-- `heartbeat_interval_seconds` (Number) The time interval in seconds between successive heartbeats.
-- `plugin_namespace` (String) The namespace for the Plugin resources.
-- `prism_central_certificate` (String) Optional certificate string to use to verify the server identity.
-- `prism_central_host` (String) The URL to the Nutanix Prism Central, with http(s) scheme.
-- `prism_central_poll_interval_seconds` (Number) The interval between polls to Prism Central for state changes, in seconds.
-- `prism_central_tls_verify` (Boolean) Whether the client will verify the server's certificate.
-
 
 <a id="nestedatt--alarms"></a>
 ### Nested Schema for `alarms`
@@ -75,6 +61,21 @@ Read-Only:
 - `labels` (Map of String)
 - `name` (String)
 - `namespace` (String)
+
+
+<a id="nestedatt--spec"></a>
+### Nested Schema for `spec`
+
+Read-Only:
+
+- `auth_secret_ref` (String) The name of a secret containing 'username' and 'password' keys to authenticate with Prism Central.
+- `heartbeat_interval_seconds` (Number) The time interval in seconds between successive heartbeats.
+- `operational_mode` (String) Option to restrict the plugin to either Connect or EDA managed networking.
+- `plugin_namespace` (String) The namespace for the Plugin resources.
+- `prism_central_certificate` (String) Optional certificate string to use to verify the server identity.
+- `prism_central_host` (String) The URL to the Nutanix Prism Central, with http(s) scheme.
+- `prism_central_poll_interval_seconds` (Number) The interval between polls to Prism Central for state changes, in seconds.
+- `prism_central_tls_verify` (Boolean) Whether the client will verify the server's certificate.
 
 
 <a id="nestedatt--status"></a>

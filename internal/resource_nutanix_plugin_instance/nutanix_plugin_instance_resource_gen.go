@@ -134,6 +134,20 @@ func NutanixPluginInstanceResourceSchema(ctx context.Context) schema.Schema {
 						MarkdownDescription: "The time interval in seconds between successive heartbeats.",
 						Default:             int64default.StaticInt64(10),
 					},
+					"operational_mode": schema.StringAttribute{
+						Optional:            true,
+						Computed:            true,
+						Description:         "Option to restrict the plugin to either Connect or EDA managed networking.",
+						MarkdownDescription: "Option to restrict the plugin to either Connect or EDA managed networking.",
+						Validators: []validator.String{
+							stringvalidator.OneOf(
+								"ConnectManagedOnly",
+								"EDAManagedOnly",
+								"Unrestricted",
+							),
+						},
+						Default: stringdefault.StaticString("Unrestricted"),
+					},
 					"plugin_namespace": schema.StringAttribute{
 						Required:            true,
 						Description:         "The namespace for the Plugin resources.",
@@ -141,6 +155,7 @@ func NutanixPluginInstanceResourceSchema(ctx context.Context) schema.Schema {
 					},
 					"prism_central_certificate": schema.StringAttribute{
 						Optional:            true,
+						Computed:            true,
 						Description:         "Optional certificate string to use to verify the server identity.",
 						MarkdownDescription: "Optional certificate string to use to verify the server identity.",
 					},
@@ -1625,6 +1640,24 @@ func (t SpecType) ValueFromObject(ctx context.Context, in basetypes.ObjectValue)
 			fmt.Sprintf(`heartbeat_interval_seconds expected to be basetypes.Int64Value, was: %T`, heartbeatIntervalSecondsAttribute))
 	}
 
+	operationalModeAttribute, ok := attributes["operational_mode"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`operational_mode is missing from object`)
+
+		return nil, diags
+	}
+
+	operationalModeVal, ok := operationalModeAttribute.(basetypes.StringValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`operational_mode expected to be basetypes.StringValue, was: %T`, operationalModeAttribute))
+	}
+
 	pluginNamespaceAttribute, ok := attributes["plugin_namespace"]
 
 	if !ok {
@@ -1722,6 +1755,7 @@ func (t SpecType) ValueFromObject(ctx context.Context, in basetypes.ObjectValue)
 	return SpecValue{
 		AuthSecretRef:                   authSecretRefVal,
 		HeartbeatIntervalSeconds:        heartbeatIntervalSecondsVal,
+		OperationalMode:                 operationalModeVal,
 		PluginNamespace:                 pluginNamespaceVal,
 		PrismCentralCertificate:         prismCentralCertificateVal,
 		PrismCentralHost:                prismCentralHostVal,
@@ -1830,6 +1864,24 @@ func NewSpecValue(attributeTypes map[string]attr.Type, attributes map[string]att
 			fmt.Sprintf(`heartbeat_interval_seconds expected to be basetypes.Int64Value, was: %T`, heartbeatIntervalSecondsAttribute))
 	}
 
+	operationalModeAttribute, ok := attributes["operational_mode"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`operational_mode is missing from object`)
+
+		return NewSpecValueUnknown(), diags
+	}
+
+	operationalModeVal, ok := operationalModeAttribute.(basetypes.StringValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`operational_mode expected to be basetypes.StringValue, was: %T`, operationalModeAttribute))
+	}
+
 	pluginNamespaceAttribute, ok := attributes["plugin_namespace"]
 
 	if !ok {
@@ -1927,6 +1979,7 @@ func NewSpecValue(attributeTypes map[string]attr.Type, attributes map[string]att
 	return SpecValue{
 		AuthSecretRef:                   authSecretRefVal,
 		HeartbeatIntervalSeconds:        heartbeatIntervalSecondsVal,
+		OperationalMode:                 operationalModeVal,
 		PluginNamespace:                 pluginNamespaceVal,
 		PrismCentralCertificate:         prismCentralCertificateVal,
 		PrismCentralHost:                prismCentralHostVal,
@@ -2006,6 +2059,7 @@ var _ basetypes.ObjectValuable = SpecValue{}
 type SpecValue struct {
 	AuthSecretRef                   basetypes.StringValue `tfsdk:"auth_secret_ref"`
 	HeartbeatIntervalSeconds        basetypes.Int64Value  `tfsdk:"heartbeat_interval_seconds"`
+	OperationalMode                 basetypes.StringValue `tfsdk:"operational_mode"`
 	PluginNamespace                 basetypes.StringValue `tfsdk:"plugin_namespace"`
 	PrismCentralCertificate         basetypes.StringValue `tfsdk:"prism_central_certificate"`
 	PrismCentralHost                basetypes.StringValue `tfsdk:"prism_central_host"`
@@ -2015,13 +2069,14 @@ type SpecValue struct {
 }
 
 func (v SpecValue) ToTerraformValue(ctx context.Context) (tftypes.Value, error) {
-	attrTypes := make(map[string]tftypes.Type, 7)
+	attrTypes := make(map[string]tftypes.Type, 8)
 
 	var val tftypes.Value
 	var err error
 
 	attrTypes["auth_secret_ref"] = basetypes.StringType{}.TerraformType(ctx)
 	attrTypes["heartbeat_interval_seconds"] = basetypes.Int64Type{}.TerraformType(ctx)
+	attrTypes["operational_mode"] = basetypes.StringType{}.TerraformType(ctx)
 	attrTypes["plugin_namespace"] = basetypes.StringType{}.TerraformType(ctx)
 	attrTypes["prism_central_certificate"] = basetypes.StringType{}.TerraformType(ctx)
 	attrTypes["prism_central_host"] = basetypes.StringType{}.TerraformType(ctx)
@@ -2032,7 +2087,7 @@ func (v SpecValue) ToTerraformValue(ctx context.Context) (tftypes.Value, error) 
 
 	switch v.state {
 	case attr.ValueStateKnown:
-		vals := make(map[string]tftypes.Value, 7)
+		vals := make(map[string]tftypes.Value, 8)
 
 		val, err = v.AuthSecretRef.ToTerraformValue(ctx)
 
@@ -2049,6 +2104,14 @@ func (v SpecValue) ToTerraformValue(ctx context.Context) (tftypes.Value, error) 
 		}
 
 		vals["heartbeat_interval_seconds"] = val
+
+		val, err = v.OperationalMode.ToTerraformValue(ctx)
+
+		if err != nil {
+			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
+		}
+
+		vals["operational_mode"] = val
 
 		val, err = v.PluginNamespace.ToTerraformValue(ctx)
 
@@ -2122,6 +2185,7 @@ func (v SpecValue) ToObjectValue(ctx context.Context) (basetypes.ObjectValue, di
 	attributeTypes := map[string]attr.Type{
 		"auth_secret_ref":                     basetypes.StringType{},
 		"heartbeat_interval_seconds":          basetypes.Int64Type{},
+		"operational_mode":                    basetypes.StringType{},
 		"plugin_namespace":                    basetypes.StringType{},
 		"prism_central_certificate":           basetypes.StringType{},
 		"prism_central_host":                  basetypes.StringType{},
@@ -2142,6 +2206,7 @@ func (v SpecValue) ToObjectValue(ctx context.Context) (basetypes.ObjectValue, di
 		map[string]attr.Value{
 			"auth_secret_ref":                     v.AuthSecretRef,
 			"heartbeat_interval_seconds":          v.HeartbeatIntervalSeconds,
+			"operational_mode":                    v.OperationalMode,
 			"plugin_namespace":                    v.PluginNamespace,
 			"prism_central_certificate":           v.PrismCentralCertificate,
 			"prism_central_host":                  v.PrismCentralHost,
@@ -2172,6 +2237,10 @@ func (v SpecValue) Equal(o attr.Value) bool {
 	}
 
 	if !v.HeartbeatIntervalSeconds.Equal(other.HeartbeatIntervalSeconds) {
+		return false
+	}
+
+	if !v.OperationalMode.Equal(other.OperationalMode) {
 		return false
 	}
 
@@ -2210,6 +2279,7 @@ func (v SpecValue) AttributeTypes(ctx context.Context) map[string]attr.Type {
 	return map[string]attr.Type{
 		"auth_secret_ref":                     basetypes.StringType{},
 		"heartbeat_interval_seconds":          basetypes.Int64Type{},
+		"operational_mode":                    basetypes.StringType{},
 		"plugin_namespace":                    basetypes.StringType{},
 		"prism_central_certificate":           basetypes.StringType{},
 		"prism_central_host":                  basetypes.StringType{},
